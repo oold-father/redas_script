@@ -61,6 +61,10 @@ def split_scale(scale_str):
     return {'scaleLeft': scale_min, 'scaleRight': scale_max}
 
 
+def remake_url(url_str: str):
+    return url_str.split("?")[0]
+
+
 def strToHash(str):
     return hashlib.sha256(bytes(str, encoding="utf8")).hexdigest()
 
@@ -80,3 +84,5 @@ if __name__ == '__main__':
           r'"Java"],"spiderUuid":"adc03b4a-1b00-11ea-b5b4-54759502c5a0"} '
 
     print(strToHash(recrStr))
+
+    print(remake_url(r"https://www.lagou.com/jobs/6629421.html?show\u003dc328dded782942f091fb26cc9b096125"))

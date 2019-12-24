@@ -65,6 +65,9 @@ def main():
         # 将scale字段拆分
         contentJson.update(utils.split_scale(contentJson.get("scale")))
 
+        # 拆分url
+        contentJson["srcUrl"] = utils.remake_url(contentJson["srcUrl"])
+
         data.content = json.dumps(contentJson, ensure_ascii=False)
         data.hash = utils.strToHash(data.content)
 
