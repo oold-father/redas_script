@@ -51,10 +51,14 @@ def split_scale(scale_str):
     scale_min = 0
     scale_max = 0
 
-    if re.search('[[0-9]+人]', scale_str):
+    if re.search('[0-9]+人', scale_str):
         group = re.findall('([0-9]+)', scale_str)
-        scale_min = int(group[0])
-        scale_max = 0 if len(group) == 1 else int(group[-1])
+        if len(group) == 1:
+            scale_min = int(group[0]) if group[0] == "2000" else 0
+            scale_max = int(group[0]) if group[0] == "15" else 0
+        else:
+            scale_min = int(group[0])
+            scale_max = int(group[-1])
     else:
         pass
 
