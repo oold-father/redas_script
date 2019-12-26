@@ -76,12 +76,28 @@ def remake_url(url_str: str):
 
 
 def strToHash(str):
-    return hashlib.sha256(bytes(str, encoding="utf8")).hexdigest()
+    import requests
+    import json
+
+    headers = {'Content-Type': 'application/json'}
+    data=json.loads(str)
+    response = requests.get('http://192.168.0.20:8080/script/hashString', headers=headers, data=json.dumps(data))
+    if not response.status_code == 200:
+        print(response.content)
+        print(response.status_code)
+
+        raise requests.exceptions.HTTPError
+    return json.loads(response.content).get("result")
+
 
 
 if __name__ == '__main__':
     recrStr = '{"srcName": "拉勾", "srcPosId": "6629421", "srcUrl": "https://www.lagou.com/jobs/6629421.html", "advantage": ["公司背景好", "发展稳定", "平台广阔"], "companyMainPage": "https://www.lagou.com/gongsi/559910.html", "companyName": "伽轩成都软件开发中心", "companyNature": ["电商", "移动互联网"], "edu": "本科及以上", "exp": "经验3-5年", "hrName": "人事", "hrPosition": "HRM", "salary": "15k-30k", "posDesc": "（某国企正式编制工作机会）工作职责：根据银行项目管理流程、技术设计与开发规范，完成项目的详细设计、代码开发与版本控制、单元测试、集成测试、上线文档填写和应急方案制定等工作。工作方向：（1）可稳定持续发展。新成立软件研发中心，晋升机会较多，且银行类平台较稳定，可长期发展。（2）技术面广。核心系统业务，开发主要以银行的交易系统为主，独立开发，给全行做软件支持，因此接触的技术面较广。任职资格：1、具有1年及以上商业银行或其他金融机构信息技术相关工作经验；2、熟练掌握Java或C/C++语言等编程语言及主流开源相关技术，掌握银行IT系统开发规范、IT系统架构及数据库相关知识，近两年主要工作方向为Java或C/C++开发，具有J2EE开发平台，特别是中间业务平台设计工作经验者优先；3、具有总、分行中间业务系统开发、金融互联网产品研发工作经验者优先，如行内与跨行支付，代理财政、社会保障，资金监管，公共资源账户管理，公共事业缴费（含BS客户端）等中间业务系统。", "position": "java开发工程师", "scale": "150-500人", "stage": "B轮", "publishTime": "2019-12-09", "tagList": ["银行", "Java"], "spiderUuid": "adc03b4a-1b00-11ea-b5b4-54759502c5a0", "address": "成都-高新区-天府新区兴隆湖", "city": "成都", "salaryMin": 15, "salaryMax": 30, "several": 12, "expMin": 3, "expMax": 5, "scaleLeft": 150, "scaleRight": 500}'
-
+    # s1 = '{"srcName":"拉勾","srcPosId":"6629421","srcUrl":"https://www.lagou.com/jobs/6629421.html","advantage":["公司背景好","发展稳定","平台广阔"],"companyMainPage":"https://www.lagou.com/gongsi/559910.html","companyName":"伽轩成都软件开发中心","companyNature":["电商","移动互联网"],"edu":"本科及以上","exp":"经验3-5年","expMax":5,"expMin":3,"hrName":"人事","hrPosition":"HRM","city":"成都","address":"成都-高新区-天府新区兴隆湖","salary":"15k-30k","salaryMax":30,"salaryMin":15,"posDesc":"（某国企正式编制工作机会）工作职责：根据银行项目管理流程、技术设计与开发规范，完成项目的详细设计、代码开发与版本控制、单元测试、集成测试、上线文档填写和应急方案制定等工作。工作方向：（1）可稳定持续发展。新成立软件研发中心，晋升机会较多，且银行类平台较稳定，可长期发展。（2）技术面广。核心系统业务，开发主要以银行的交易系统为主，独立开发，给全行做软件支持，因此接触的技术面较广。任职资格：1、具有1年及以上商业银行或其他金融机构信息技术相关工作经验；2、熟练掌握Java或C/C++语言等编程语言及主流开源相关技术，掌握银行IT系统开发规范、IT系统架构及数据库相关知识，近两年主要工作方向为Java或C/C++开发，具有J2EE开发平台，特别是中间业务平台设计工作经验者优先；3、具有总、分行中间业务系统开发、金融互联网产品研发工作经验者优先，如行内与跨行支付，代理财政、社会保障，资金监管，公共资源账户管理，公共事业缴费（含BS客户端）等中间业务系统。","position":"java开发工程师","scale":"150-500人","scaleLeft":150,"scaleRight":500,"stage":"B轮","publishTime":"2019-12-09","tagList":["银行","Java"],"spiderUuid":"adc03b4a-1b00-11ea-b5b4-54759502c5a0","several":12}'
+    # s3 = '{"srcName":"拉勾","srcPosId":"6629421","srcUrl":"https://www.lagou.com/jobs/6629421.html","advantage":["公司背景好","发展稳定","平台广阔"],"companyMainPage":"https://www.lagou.com/gongsi/559910.html","companyName":"伽轩成都软件开发中心","companyNature":["电商","移动互联网"],"edu":"本科及以上","exp":"经验3-5年","hrName":"人事","hrPosition":"HRM","salary":"15k-30k","posDesc":"（某国企正式编制工作机会）工作职责：根据银行项目管理流程、技术设计与开发规范，完成项目的详细设计、代码开发与版本控制、单元测试、集成测试、上线文档填写和应急方案制定等工作。工作方向：（1）可稳定持续发展。新成立软件研发中心，晋升机会较多，且银行类平台较稳定，可长期发展。（2）技术面广。核心系统业务，开发主要以银行的交易系统为主，独立开发，给全行做软件支持，因此接触的技术面较广。任职资格：1、具有1年及以上商业银行或其他金融机构信息技术相关工作经验；2、熟练掌握Java或C/C++语言等编程语言及主流开源相关技术，掌握银行IT系统开发规范、IT系统架构及数据库相关知识，近两年主要工作方向为Java或C/C++开发，具有J2EE开发平台，特别是中间业务平台设计工作经验者优先；3、具有总、分行中间业务系统开发、金融互联网产品研发工作经验者优先，如行内与跨行支付，代理财政、社会保障，资金监管，公共资源账户管理，公共事业缴费（含BS客户端）等中间业务系统。","position":"java开发工程师","scale":"150-500人","stage":"B轮","publishTime":"2019-12-09","tagList":["银行","Java"],"spiderUuid":"adc03b4a-1b00-11ea-b5b4-54759502c5a0","address":"成都-高新区-天府新区兴隆湖","city":"成都","salaryMin":15,"salaryMax":30,"several":12,"expMin":3,"expMax":5,"scaleLeft":150,"scaleRight":500}'
+    s2 = recrStr.replace(" ", "")
     print(strToHash(recrStr))
+    print(s2)
+
 
     # print(remake_url(r"https://www.lagou.com/jobs/6629421.html?show\u003dc328dded782942f091fb26cc9b096125"))

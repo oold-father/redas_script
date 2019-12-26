@@ -9,7 +9,7 @@ mysql_host = "127.0.0.1"
 mysql_port = 3306
 mysql_db = "redas"
 mysql_name = "root"
-mysql_password = "geek"
+mysql_password = "admin"
 
 Base = declarative_base()
 
@@ -70,7 +70,6 @@ def main():
 
         data.content = json.dumps(contentJson, ensure_ascii=False)
         data.hash = utils.strToHash(data.content)
-
         session.flush()
         id += 1
 

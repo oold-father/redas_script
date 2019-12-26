@@ -43,7 +43,8 @@ session = DBSession()
 
 def main():
     id = 0
-    while id < 19833:
+    time = 0
+    while time < session.query(Company.id).count():
         id += 1
         print("正在进行第%s条记录" % id)
         data = None
@@ -61,6 +62,7 @@ def main():
         data.scale_left = result.get("scaleLeft")
 
         session.flush()
+        time += 1
 
     session.commit()
 

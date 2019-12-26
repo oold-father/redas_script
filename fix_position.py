@@ -15,7 +15,7 @@ mysql_host = "127.0.0.1"
 mysql_port = 3306
 mysql_db = "redas"
 mysql_name = "root"
-mysql_password = "geek"
+mysql_password = "admin"
 
 Base = declarative_base()
 
@@ -55,7 +55,8 @@ session = DBSession()
 
 def main():
     id = 0
-    while id <44475:
+    time = 0
+    while time < session.query(Position.id).count():
         id += 1
         print("正在进行第%s条记录" % id)
         data = None
@@ -75,7 +76,10 @@ def main():
         data.exp_max= exp.get("expMax")
         data.exp_min = exp.get("expMin")
 
+        data.src_url = utils.remake_url(data.src_url)
+
         session.flush()
+        time += 1
     session.commit()
 
 
