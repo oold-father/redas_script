@@ -42,14 +42,17 @@ session = DBSession()
 
 
 def main():
-    id = 1
-    while True:
+    id = 0
+    while id < 19833:
+        id += 1
         print("正在进行第%s条记录" % id)
         data = None
         try:
             data = session.query(Company).filter(Company.id == id).one()
         except NoResultFound:
-            break
+            print("NoResultFound")
+            continue
+
 
         data.main_page = data.main_page if not data.main_page == "http://" else None
 
@@ -58,7 +61,7 @@ def main():
         data.scale_left = result.get("scaleLeft")
 
         session.flush()
-        id += 1
+
     session.commit()
 
 
