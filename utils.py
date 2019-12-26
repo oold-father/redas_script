@@ -16,7 +16,7 @@ def split_salary(salary_str):
     if re.search('[kK]', salary_str):
         group = re.findall('([0-9]+)', salary_str)
         salary_min = int(group[0])
-        salary_max = 0 if len(group) == 1 else int(group[-1])
+        salary_max = 0 if len(group) == 1 else int(group[1])
         try:
             several = group[2]
         except IndexError:
