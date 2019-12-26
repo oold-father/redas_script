@@ -39,8 +39,8 @@ def split_exp(exp_str):
         pass
     elif re.search('[年]', exp_str):
         group = re.findall('([0-9]+)', exp_str)
-        exp_min = 0 if len(group) == 1 else int(group[0])
-        exp_max = int(group[-1])
+        exp_min = int(group[0])
+        exp_max = 0 if len(group) == 1 else int(group[-1])
     else:
         pass
 
