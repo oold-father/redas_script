@@ -2,14 +2,14 @@ from sqlalchemy import Column, String, create_engine, Integer
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm.exc import NoResultFound
-from .. import utils
+import utils
 import json
 
 mysql_host = "127.0.0.1"
 mysql_port = 3306
 mysql_db = "redas"
 mysql_name = "root"
-mysql_password = "admin"
+mysql_password = "geek"
 
 Base = declarative_base()
 
